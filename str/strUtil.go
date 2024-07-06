@@ -13,6 +13,11 @@ func IsEmpty(sourceStr string) bool {
 	return trimmedStr == ""
 }
 
+// IsNotEmpty 检测是否是空串
+func IsNotEmpty(sourceStr string) bool {
+	return !IsEmpty(sourceStr)
+}
+
 // IndexOf 返回字符在原始字符串的下标
 func IndexOf(sourceStr string, subStr rune) int {
 	for index, char := range sourceStr {
@@ -47,7 +52,7 @@ func ParseStr(source interface{}) string {
 	case []byte:
 		return string(v)
 	default:
-		return fmt.Sprintf("%v", source)
+		return fmt.Sprintf("%+v", source)
 	}
 }
 
@@ -148,4 +153,17 @@ func filterSymbols(str string) string {
 // IsAlphaNumericOrChinese  检查字符是否为字母、数字或汉字
 func IsAlphaNumericOrChinese(char rune) bool {
 	return (char >= '0' && char <= '9') || (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= 0x4e00 && char <= 0x9fff)
+}
+
+// Format 通过map中的参数 格式化字符串
+// map = {a: "aValue", b: "bValue"} format("{a} and {b}", map) ---=》 aValue and bValue
+func Format(template string, params map[string]interface{}) string {
+	// 遍历map中的键值对
+	for key, value := range params {
+		// 构造占位符，例如 "{a}"
+		placeholder := fmt.Sprintf("{%s}", key)
+		// 将占位符替换为对应的值
+		template = strings.ReplaceAll(template, placeholder, fmt.Sprintf("%v", value))
+	}
+	return template
 }
