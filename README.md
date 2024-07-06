@@ -40,6 +40,8 @@
 
 - IsEmpty 检测是否是空串
 - IsNotEmpty 检测是否是空串
+- Replace 替换字符串
+- ReplaceAll 替换字符串
 - IndexOf 返回字符在原始字符串的下标
 - SubString 切割原始字符，返回子串 范围：[s,e)
 - ParseStr 解析字符串
@@ -48,5 +50,5 @@
 - Fill 将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串
 - Similar 计算两个字符串的相似度
 - SimilarScale 计算两个字符串的相似度百分比
-- IsAlphaNumericOrChinese  检查字符是否为字母、数字或汉字
+- IsAlphaNumericOrChinese 检查字符是否为字母、数字或汉字
 - Format 通过map中的参数 格式化字符串

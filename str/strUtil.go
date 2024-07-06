@@ -18,6 +18,16 @@ func IsNotEmpty(sourceStr string) bool {
 	return !IsEmpty(sourceStr)
 }
 
+// Replace 替换字符串
+func Replace(source string, searchStr string, replacement string, replaceCount int) string {
+	return strings.Replace(source, searchStr, replacement, replaceCount)
+}
+
+// ReplaceAll 替换字符串
+func ReplaceAll(source string, searchStr string, replacement string) string {
+	return strings.ReplaceAll(source, searchStr, replacement)
+}
+
 // IndexOf 返回字符在原始字符串的下标
 func IndexOf(sourceStr string, subStr rune) int {
 	for index, char := range sourceStr {
