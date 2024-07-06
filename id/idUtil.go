@@ -45,7 +45,7 @@ func getSnowflakeInstance() *Snowflake {
 	return instance
 }
 
-// NewSnowflake 初始化一个新的Snowflake实例
+// 初始化一个新的Snowflake实例
 func newSnowflake(workerID, datacenterID int64) *Snowflake {
 	if workerID > maxWorkerID || workerID < 0 {
 		return nil

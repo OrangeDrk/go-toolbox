@@ -1,9 +1,5 @@
 package numberUtil
 
-import (
-	"math"
-)
-
 // Min 返回整数中的最小值
 func Min(intList []int) int {
 	if len(intList) == 0 {
@@ -30,9 +26,4 @@ func Max(intArr []int) int {
 		}
 	}
 	return maxVal
-}
-
-func ScaleFloat64(number float64, scale int) float64 {
-	result := math.Round(number*100) / 100
-	return result
 }
