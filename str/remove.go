@@ -43,3 +43,19 @@ func RemovePrefixIgnoreCase(str string, prefix string) string {
 	prefix = strings.ToLower(prefix)
 	return RemovePrefix(str, prefix)
 }
+
+// RemoveSuffix 去掉指定后缀
+func RemoveSuffix(str string, suffix string) string {
+	if IsEmpty(str) || IsEmpty(suffix) {
+		return str
+	}
+	if strings.HasSuffix(str, suffix) {
+		return str[:len(suffix)]
+	}
+	return str
+}
+
+// RemoveSuffixIgnoreCase 去掉指定后缀(忽略大小写)
+func RemoveSuffixIgnoreCase(str string, suffix string) string {
+	return RemoveSuffix(strings.ToLower(str), strings.ToLower(suffix))
+}

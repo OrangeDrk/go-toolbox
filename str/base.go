@@ -6,16 +6,6 @@ import (
 	"strings"
 )
 
-// IndexOf 返回字符在原始字符串的下标
-func IndexOf(sourceStr string, subStr rune) int {
-	for index, char := range sourceStr {
-		if char == subStr {
-			return index
-		}
-	}
-	return -1
-}
-
 // SubString 切割原始字符，返回子串 范围：[s,e)
 func SubString(sourceStr string, s int, e int) string {
 	if s < 0 || e > len(sourceStr) || s > e {
@@ -59,6 +49,23 @@ func levenshteinDistance(str1 string, str2 string) int {
 
 	return dist[len1][len2]
 }
+
+// Revers 反转字符串
+func Revers(str string) string {
+	// 将字符串转换为 rune 切片，以便处理多字节字符
+	runes := []rune(str)
+	n := len(runes)
+
+	// 反转 rune 切片
+	for i := 0; i < n/2; i++ {
+		runes[i], runes[n-1-i] = runes[n-1-i], runes[i]
+	}
+
+	// 将反转后的 rune 切片转换回字符串
+	return string(runes)
+}
+
+// ------------------------- test
 
 // Similar 计算两个字符串的相似度
 // 只比较两个字符串字母、数字、汉字部分，其他符号去除

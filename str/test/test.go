@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	strUtil "github.com/OrangeDrk/go-toolbox/str"
+	"strconv"
 )
 
 func testStr() {
@@ -49,7 +50,26 @@ func testReplace() {
 }
 
 func main() {
-	str := "Sxh12313"
-	prefix := strUtil.RemovePrefixIgnoreCase(str, "sxh")
-	fmt.Println(prefix)
+	//fmt.Println(strUtil.ContainsBlank("Hello World"))        // true
+	//fmt.Println(strUtil.ContainsBlank("Hello\tWorld"))       // true
+	//fmt.Println(strUtil.ContainsBlank("Hello　World"))        // true （全角空格）
+	//fmt.Println(strUtil.ContainsBlank("Hello     World   ")) // true （不间断空格）
+	//fmt.Println(strUtil.ContainsBlank("HelloWorld"))         // false
+
+	str := "1;2;3;4;5;6"
+	fmt.Printf("%#v\n", strUtil.Split(str, ";"))
+	fmt.Printf("%#v\n", strUtil.SplitTrim(str, ";"))
+	fmt.Printf("%#v\n", strUtil.SplitLimit(str, ";", 2))
+	fmt.Printf("%#v\n", strUtil.SplitTrimLimit(str, ";", 2))
+
+	mapping := strUtil.SplitAfterMapping[int](str, ";", func(s string) (int, error) {
+		i, err := strconv.Atoi(s)
+		if err != nil {
+			return 0, err
+		}
+		return i, nil
+	})
+	fmt.Printf("%#v\n", mapping)
+	fmt.Printf("%#v\n", strUtil.SplitByLen(str, 3))
+	fmt.Printf("%#v\n", strUtil.Cut(str, 3))
 }
