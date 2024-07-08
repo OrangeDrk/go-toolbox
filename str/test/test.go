@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	strUtil "github.com/OrangeDrk/go-toolbox/str"
-	"strconv"
 )
 
 func testStr() {
@@ -56,20 +55,37 @@ func main() {
 	//fmt.Println(strUtil.ContainsBlank("Hello     World   ")) // true （不间断空格）
 	//fmt.Println(strUtil.ContainsBlank("HelloWorld"))         // false
 
-	str := "1;2;3;4;5;6"
-	fmt.Printf("%#v\n", strUtil.Split(str, ";"))
-	fmt.Printf("%#v\n", strUtil.SplitTrim(str, ";"))
-	fmt.Printf("%#v\n", strUtil.SplitLimit(str, ";", 2))
-	fmt.Printf("%#v\n", strUtil.SplitTrimLimit(str, ";", 2))
+	//str := "1;2;3=4;5;6"
+	//fmt.Printf("%#v\n", strUtil.Split(str, ";"))
+	//fmt.Printf("%#v\n", strUtil.SplitTrim(str, ";"))
+	//fmt.Printf("%#v\n", strUtil.SplitLimit(str, ";", 2))
+	//fmt.Printf("%#v\n", strUtil.SplitTrimLimit(str, ";", 2))
 
-	mapping := strUtil.SplitAfterMapping[int](str, ";", func(s string) (int, error) {
-		i, err := strconv.Atoi(s)
-		if err != nil {
-			return 0, err
-		}
-		return i, nil
-	})
-	fmt.Printf("%#v\n", mapping)
-	fmt.Printf("%#v\n", strUtil.SplitByLen(str, 3))
-	fmt.Printf("%#v\n", strUtil.Cut(str, 3))
+	//mapping := strUtil.SplitAfterMapping[int](str, ";", func(s string) (int, error) {
+	//	i, err := strconv.Atoi(s)
+	//	if err != nil {
+	//		return 0, err
+	//	}
+	//	return i, nil
+	//})
+	//fmt.Printf("%#v\n", mapping)
+	//fmt.Printf("%#v\n", strUtil.SplitByLen(str, 3))
+	////fmt.Printf("%#v\n", strUtil.SubString(str, 0, 4))
+	//fmt.Printf("%#v\n", strUtil.SubBefore(str, "=", false))
+	//fmt.Printf("%#v\n", strUtil.SubAfter("=", "=", false))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("wx[b] yz", "[", "]"))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("yabcz", "", ""))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("yabcz", "y", "z"))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("yabczyabcz", "y", "z"))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("", "[", "]"))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("", "", "]"))
+	//fmt.Printf("%#v\n", strUtil.SubBetween("", "", ""))
+	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("yabczyabcz", "y", "z"))
+	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("[yabc[zy] abcz]", "[", "]"))
+	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("yabcz", "y", "z"))
+	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("", "[", "]"))
+	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("wx[b] y[z]", "[", "]"))
+	fmt.Printf("%#v\n", strUtil.Repeat("sxh", 2))
+	fmt.Printf("%#v\n", strUtil.RepeatByLength("sxh", 5))
+
 }

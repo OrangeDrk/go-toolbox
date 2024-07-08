@@ -6,14 +6,6 @@ import (
 	"strings"
 )
 
-// SubString 切割原始字符，返回子串 范围：[s,e)
-func SubString(sourceStr string, s int, e int) string {
-	if s < 0 || e > len(sourceStr) || s > e {
-		return ""
-	}
-	return sourceStr[s:e]
-}
-
 // levenshteinDistance 计算两个字符串的相似度
 // 返回的是两个字符串编辑距离，如果两个字符串相等，那么编辑距离为0，完全不相等，编辑距离距离就是最长字符串的长度
 // 返回的数值越大，表示相似度越低
