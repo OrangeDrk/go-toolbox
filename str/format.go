@@ -2,6 +2,7 @@ package strUtil
 
 import (
 	"fmt"
+	numberUtil "github.com/OrangeDrk/go-toolbox/number"
 	"strconv"
 	"strings"
 )
@@ -62,6 +63,19 @@ func Format(template string, params map[string]interface{}) string {
 	return template
 }
 
+// IndexedFormat 有序的格式化文本，使用{number}做为占位符
+// 通常使用：format("this is {0} for {1}", "a", "b") =》 this is a for b
+func IndexedFormat(template string, params []interface{}) string {
+
+	// 遍历所有参数
+	for i, param := range params {
+		placeholder := fmt.Sprintf("{%d}", i)
+		// 将占位符替换为对应的值
+		template = ReplaceAll(template, placeholder, fmt.Sprintf("%v", param))
+	}
+	return template
+}
+
 // TruncateAppendEllipsis 截断字符串，使用不超过maxBytes长度。截断后自动追加省略号(...) 用于存储数据库varchar且编码为UTF-8的字段
 func TruncateAppendEllipsis(str string, maxBytes int) string {
 	// 如果字符串本身就比 maxBytes 短，则不需要截断
@@ -93,4 +107,49 @@ func AddSuffixIfNot(str string, suffix string) string {
 		return str
 	}
 	return str + suffix
+}
+
+// PadPre 补充字符串以满足指定长度，如果提供的字符串大于指定长度,截断;
+func PadPre(str string, length int, padStr string) string {
+	if length == 0 {
+		return ""
+	}
+	if length < 0 {
+		return str[:numberUtil.Max([]int{0, len(str) + length})]
+	}
+	// 如果字符串长度大于指定长度，则截断
+	if len(str) >= length {
+		return str[:length]
+	}
+
+	// 计算需要填充的字符数
+	padCount := length - len(str)
+
+	// 使用 strings.Repeat 函数生成填充字符串
+	padding := RepeatByLength(padStr, padCount)
+
+	// 返回填充后的字符串
+	return padding + str
+}
+
+// PadAfter 补充字符串以满足最小长度，如果提供的字符串大于指定长度，截断之
+func PadAfter(str string, length int, padStr string) string {
+	if length == 0 {
+		return ""
+	}
+	if length < 0 {
+		return str[:numberUtil.Max([]int{0, len(str) + length})]
+	}
+	if len(str) == length {
+		return str
+	}
+	// 计算需要填充的字符数
+	padCount := length - len(str)
+
+	// 使用 strings.Repeat 函数生成填充字符串
+	padding := RepeatByLength(padStr, padCount)
+
+	// 返回填充后的字符串
+	return str + padding
+
 }

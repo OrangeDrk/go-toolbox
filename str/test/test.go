@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	desensitizedUtil "github.com/OrangeDrk/go-toolbox/desensitized"
 	strUtil "github.com/OrangeDrk/go-toolbox/str"
 )
 
@@ -39,6 +40,21 @@ func testStrFormat() {
 	}
 
 	format := strUtil.Format(str, p)
+	fmt.Println(format)
+}
+
+func testIndexFormat() {
+	str := "今天天气:{0},上班时间:{1},城市:{2},age:{3}, arg:{4}"
+	//p := map[string]interface{}{
+	//	"a":    "多云",
+	//	"sb":   "8:30",
+	//	"city": "北京",
+	//	"age":  9,
+	//	"arg":  []int{1, 2, 3, 4},
+	//}
+	p := []interface{}{"多云", "8:30", "beijing", 9, []int{1, 2, 3, 4, 5}}
+
+	format := strUtil.IndexedFormat(str, p)
 	fmt.Println(format)
 }
 
@@ -85,7 +101,46 @@ func main() {
 	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("yabcz", "y", "z"))
 	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("", "[", "]"))
 	//fmt.Printf("%#v\n", strUtil.SubBetweenAll("wx[b] y[z]", "[", "]"))
-	fmt.Printf("%#v\n", strUtil.Repeat("sxh", 2))
-	fmt.Printf("%#v\n", strUtil.RepeatByLength("sxh", 5))
+	//fmt.Printf("%#v\n", strUtil.Repeat("sxh", 2))
+	//fmt.Printf("%#v\n", strUtil.RepeatByLength("sxh", 5))
+	//fmt.Printf("%#v\n", strUtil.RepeatAndJoin("sxh", ";", 5))
+	//fmt.Printf("%#v\n", strUtil.EqualsAt("sxh", 1, "xh"))
+	////testIndexFormat()
+	//fmt.Printf("%#v\n", strUtil.PadPre("sxh", 5, "666"))
+	//fmt.Printf("%#v\n", strUtil.PadPre("sxh", -19, "666"))
+	//
+	//fmt.Printf("%#v\n", strUtil.PadAfter("sxh", -9, "666"))
+	//fmt.Printf("%#v\n", strUtil.PadAfter("sxh", 10, "666"))
+	//fmt.Printf("%#v\n", strUtil.Count("sxh666,ssr", "s"))
+	//fmt.Printf("%#v\n", strUtil.IndexOfByRangeStart("sxh666,ssr", "s", 7))
 
+	//str := "sxh666,ssrrrr"
+	//fmt.Printf("%#v\n", strUtil.IndexOf(str, "s"))
+	//fmt.Printf("%#v\n", strUtil.IndexOfByRangeStart(str, "s", 10))
+	//fmt.Printf("%#v\n", strUtil.IndexOfByRange(str, "s", 3, 8))
+	//fmt.Printf("%#v\n", strUtil.IndexOfByRange(str, "s", 3, 4))
+	//fmt.Printf("%#v\n", strUtil.LastIndexOf(str, "s"))
+	//fmt.Printf("%#v\n", strUtil.LastIndexOfIgnoreCaseByRangeStart(str, "s", 7))
+	//fmt.Printf("%#v\n", strUtil.ReplaceWithMatcher(str, "(\\d)", func(s string) string {
+	//	return "-" + s + "-"
+	//}))
+	//fmt.Printf("%#v\n", strUtil.Hide(str, 1, 7))
+	//fmt.Printf("%#v\n", strUtil.RepeatByLength("abcd", 3))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("17603393007", desensitizedUtil.MobilePhone))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("石晓浩", desensitizedUtil.ChineseName))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("李赵一特", desensitizedUtil.ChineseName))
+
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("131182199702251631", desensitizedUtil.IDCard))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("北京市海淀区清华东路西口29#1#601", desensitizedUtil.Address))
+	fmt.Printf("%#v\n", strUtil.Length("北京市海淀区清华东路西口29#1#601"))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("北京市海淀区清华东路西口29#1#601", desensitizedUtil.Email))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("12313123123", desensitizedUtil.Password))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("苏D40000", desensitizedUtil.CarLicense))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("陕A12345D", desensitizedUtil.CarLicense))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("1234    2222 3333 4444 6789 9", desensitizedUtil.BankCard))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("1234 2222 3333 4444 6789 91", desensitizedUtil.BankCard))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("1234 2222 3333 4444 678", desensitizedUtil.BankCard))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("1234 2222 3333 4444 6789", desensitizedUtil.BankCard))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("127.0.0.1", desensitizedUtil.IPV4))
+	fmt.Printf("%#v\n", desensitizedUtil.Desensitized("2001:0db8:86a3:08d3:1319:8a2e:0370:7344", desensitizedUtil.IPV6))
 }

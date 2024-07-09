@@ -29,3 +29,15 @@ func TrimEnd(str string) string {
 		return false
 	})
 }
+
+// CleanEmpty 清除空白串
+func CleanEmpty(str string) string {
+	strRune := []rune(str)
+	var newRune []rune
+	for _, r := range strRune {
+		if r != ' ' {
+			newRune = append(newRune, r)
+		}
+	}
+	return string(newRune)
+}

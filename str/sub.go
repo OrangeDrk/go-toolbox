@@ -14,6 +14,7 @@ import "strings"
 //}
 
 // SubBefore 截取分隔字符串之前的字符串，不包括分隔字符串
+// isLastSeparator - 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
 func SubBefore(str string, separator string, isLastSeparator bool) string {
 	if IsEmpty(str) {
 		return str
