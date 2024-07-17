@@ -30,4 +30,5 @@ func Test1(t *testing.T) {
 
 	stringSet.Clear()
 	fmt.Println("Cleared String Set, Size:", stringSet.Size()) // 输出: 0
+
 }
