@@ -9,9 +9,29 @@ func Of[T any](elems ...T) []T {
 	return elems
 }
 
-// Append 向列表中添加元素
-func Append[T any](l *[]T, item ...T) {
+// Add 向列表中添加元素
+func Add[T any](l *[]T, item ...T) {
 	*l = append(*l, item...)
+}
+
+// Remove 从列表中删除某个元素
+func Remove[T comparable](l *[]T, items ...T) {
+	// 创建一个 map 存储需要删除的元素
+	itemSet := make(map[T]struct{})
+	for _, item := range items {
+		itemSet[item] = struct{}{}
+	}
+
+	// 创建一个新的切片存储过滤后的元素
+	newList := []T{}
+	for _, v := range *l {
+		if _, found := itemSet[v]; !found {
+			newList = append(newList, v)
+		}
+	}
+
+	// 更新原切片
+	*l = newList
 }
 
 // IsEmpty 判断是否为空
@@ -23,10 +43,15 @@ func IsEmpty[T any](list []T) bool {
 	}
 }
 
-//// Length 获取长度
-//func Length[T any](list []T) int {
-//	return len(list)
-//}
+// IsNotEmpty 判断是否不为空
+func IsNotEmpty[T any](list []T) bool {
+	return !IsEmpty(list)
+}
+
+// Size Length 获取长度
+func Size[T any](list []T) int {
+	return len(list)
+}
 
 // Page 分页
 // pageNo - 页码，从1开始计算
@@ -79,7 +104,7 @@ func SetOrAppend[T any](list *[]T, index int, elem T) {
 	if index < len(*list) {
 		(*list)[index] = elem
 	} else {
-		Append(list, elem)
+		Add(list, elem)
 	}
 }
 
@@ -99,7 +124,7 @@ func IndexOfAll[T any](list []T, matcher func(T) bool) []int {
 	var indexL []int
 	for i, v := range list {
 		if matcher(v) {
-			Append(&indexL, i)
+			Add(&indexL, i)
 		}
 	}
 	return indexL
@@ -141,4 +166,13 @@ func SplitAvg[T any](list []T, limit int) [][]T {
 		result = append(result, list[i:end])
 	}
 	return result
+}
+
+func Contains[T comparable](list []T, elem T) bool {
+	for _, l := range list {
+		if l == elem {
+			return true
+		}
+	}
+	return false
 }
